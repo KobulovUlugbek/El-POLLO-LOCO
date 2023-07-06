@@ -1,11 +1,25 @@
-const level1 = new Level(
+/* let level1;
+
+function initLevel1(){ */
+
+level1 = new Level(
     [
+       /*  new Chicken(),
         new Chicken(),
         new Chicken(),
         new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(), */
         new EndBoss()
     ],
     [
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
         new Cloud()
     ],
     [
@@ -46,3 +60,5 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 1438 * 2 + 719),
     ]
 );
+
+/* } */

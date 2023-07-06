@@ -6,6 +6,8 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
+  StatusBarCoins = new StatusBarCoins();
+  StatusBarBottle = new StatusBarBottle();
   throwableObject = [];
 
   constructor(canvas, keyboard) {
@@ -56,6 +58,8 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
+    this.addToMap(this.StatusBarCoins);
+    this.addToMap(this.StatusBarBottle);
     this.ctx.translate(this.camera_x, 0);
 
 
