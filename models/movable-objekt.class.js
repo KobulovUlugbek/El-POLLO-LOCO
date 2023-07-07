@@ -4,8 +4,9 @@ class MovableObjekt extends DrawableObject {
   speedY = 0;
   acceleration = 2.5;
   energy = 100;
-  character;
   lastHit = 0;
+  setCoins = 0;
+  setBottle = 0;
 
   offset = {
     top: 0,
@@ -48,7 +49,7 @@ class MovableObjekt extends DrawableObject {
 
 
   hit(){
-    this.energy -= 1;
+    this.energy -= 5;
     if(this.energy < 0){
       this.energy = 0;
     }else{

@@ -2,7 +2,9 @@ class Character extends MovableObjekt {
   height = 220;
   y = 115;
   speed = 10;
-
+  setCoins = 0;
+  setBottle = 0;
+  
   offset = {
     top: 0,
     bottom: 0,
