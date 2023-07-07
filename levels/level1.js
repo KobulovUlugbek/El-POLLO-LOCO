@@ -16,6 +16,18 @@ level1 = new Level(
         new EndBoss()
     ],
     [
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins(),
+        new Coins()
+    ],
+    [
         new Cloud(),
         new Cloud(),
         new Cloud(),
