@@ -6,7 +6,7 @@ class Character extends MovableObjekt {
   setBottle = 0;
   
   offset = {
-    top: 0,
+    top: 100,
     bottom: 0,
     left: 0,
     right: 0
