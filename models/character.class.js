@@ -4,12 +4,14 @@ class Character extends MovableObjekt {
   speed = 10;
   setCoins = 0;
   setBottle = 0;
+  world;
+
   
   offset = {
     top: 100,
-    bottom: 0,
-    left: 0,
-    right: 0
+    bottom: -40,
+    left: -20,
+    right: -20
 }
 
   IMAGES_WALKING = [
@@ -49,7 +51,6 @@ class Character extends MovableObjekt {
     'img/2_character_pepe/4_hurt/H-43.png'
   ];
 
-  world;
   walking_sound = new Audio("audio/walking.mp3");
 
   constructor() {

@@ -11,7 +11,21 @@ class World {
   statusBarCoins = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
   throwableObject = [];
+  Interval = [];
 
+
+
+  pushInterval(interval){
+      if(!this.Interval.includes(interval)){
+          this.Interval.push(interval);
+      }
+  }
+
+  clearallInterval(){
+      this.Interval.forEach(i => {
+          clearInterval(i);
+      });
+  }
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -28,12 +42,47 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkCollectingCoins();
-      this.checkCollectingBottle();
-      this.checkThrowObject();
-      this.checkCollisions();
-    }, 200);
+      this.checkCollisionsAll();
+    }, 100);
   }
+  checkCollisionsAll(){
+    this.checkCollisions();
+    this.checkCollectingBottle();
+    this.checkCollectingCoins();
+    this.checkEnemy();
+    this.checkThrowObject();
+  }
+
+  enemyDead(enemy){
+    enemy.isDead = true;
+    let Time = new Date().getTime() + 500;
+    clearInterval(enemy.StartImageInterval);
+    this.character.jump();
+    let interval = setInterval(() => {
+        enemy.speed = 0;
+        enemy.playAnimation(enemy.IMAGES_DEAD);
+        let checkDate = new Date().getTime();
+        if (checkDate > Time) {
+            enemy.delete = true;
+            clearInterval(interval);
+        }
+    }, 100);
+    enemy.pushInterval(interval);
+}
+
+checkEnemy() {
+    this.level.enemies = this.level.enemies.filter(e => !e.delete);
+    this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead) {
+            if (enemy instanceof Chicken) {
+                this.enemyDead(enemy);
+            } else if (enemy instanceof EndBoss || enemy instanceof Chicken) {
+              this.character.hit();
+              this.statusBar.setPercentage(this.character.energy);
+            }
+        } 
+    });
+}
   
 
   checkThrowObject() {
@@ -73,7 +122,7 @@ class World {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
