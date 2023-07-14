@@ -7,7 +7,10 @@ class MovableObjekt extends DrawableObject {
   lastHit = 0;
   setCoins = 0;
   setBottle = 0;
-  Interval = [];
+  Intervals = [];
+  deleted = false;
+  world;
+
 
   offset = {
     top: 0,
@@ -18,15 +21,14 @@ class MovableObjekt extends DrawableObject {
 
 
   
-  pushInterval(interval) {
-    this.Interval.push(interval);
-  }
+  setStopableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    this.Intervals.push(id);
+}
 
-  clearallInterval() {
-    this.Interval.forEach((I) => {
-      clearInterval(I);
-    });
-  }
+clearIntervals() {
+    this.Intervals.forEach(clearInterval);
+}
 
   applyGravity() {
     setInterval(() => {
@@ -38,7 +40,7 @@ class MovableObjekt extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) {
+    if (this instanceof ThrowableObject || this instanceof Chicken) {
       return true;
     } else {
       return this.y < 215;
@@ -66,11 +68,11 @@ class MovableObjekt extends DrawableObject {
     if( Time > this.lastHit){
     this.energy -= 5;
     if (this.energy < 0) {
-      this.energy = 0;
+        this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime();
+        this.lastHit = new Date().getTime();
     }
-  }
+}
 }
 
   isDead() {
@@ -90,15 +92,32 @@ class MovableObjekt extends DrawableObject {
     this.currentImage++;
   }
 
-  moveRight() {
+  moveRight(speed) {
+    if (speed) {
+        this.speed = speed;
+    }
     this.x += this.speed;
   }
 
-  moveLeft() {
-    this.x -= this.speed;
+  moveLeft(speed) {
+  if (speed) {
+      this.speed = speed;
+  }
+  this.x -= this.speed;
   }
 
-  jump() {
-    this.speedY = 25;
-  }
+  jump(low) {
+    if (low) {
+        this.speedY = 20;
+    } else {
+        this.speedY = 25;
+    }
+}
+
+  rushAttack() {
+    this.speed = 3;
+    if (!this.isAboveGround()) {
+      this.jump('low')  
+    }        
+}
 }
