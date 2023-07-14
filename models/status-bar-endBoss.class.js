@@ -4,7 +4,7 @@ class EndBossStatus extends DrawableObject{
     x = 450;
     width = 250;
     height = 70;
-    percentage = 100;
+    percentage = 100
 
     IMAGES_ENDBOSSLIFE = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',

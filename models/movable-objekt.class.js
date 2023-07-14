@@ -41,7 +41,7 @@ clearIntervals() {
 
   isAboveGround() {
     if (this instanceof ThrowableObject || this instanceof Chicken) {
-      return true;
+      return this.y < 380;
     } else {
       return this.y < 215;
     }

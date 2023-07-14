@@ -23,6 +23,9 @@ class ThrowableObject extends MovableObjekt{
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ];
 
+    bottle_splash = new Audio("audio/bottle_splash.mp3");
+
+
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.loadImages(this.images_Hit);

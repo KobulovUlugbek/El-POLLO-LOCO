@@ -10,22 +10,25 @@ class World {
   statusBar = new StatusBar();
   statusBarCoins = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
+  endBossStatus = new EndBossStatus();
   throwableObject = [];
-  Interval = [];
+  Intervals = [];
+  allIntervals = []
+  lastThrowTime;
+  endFight = false;
+  audio = true;
 
 
 
-  pushInterval(interval){
-      if(!this.Interval.includes(interval)){
-          this.Interval.push(interval);
-      }
-  }
+  setStopableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    this.Intervals.push(id);
+}
 
-  clearallInterval(){
-      this.Interval.forEach(i => {
-          clearInterval(i);
-      });
-  }
+  clearIntervals() {
+    this.Intervals.forEach(clearInterval);
+    this.character.clearIntervals();
+}
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -34,6 +37,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.lastThrowTime = new Date().getTime();
   }
 
   setWorld() {
@@ -41,16 +45,22 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    this.setStopableInterval(() => {
       this.checkCollisionsAll();
+      this.deleteThrowObject();
     }, 100);
   }
+  
   checkCollisionsAll(){
     this.checkCollisions();
     this.checkCollectingBottle();
     this.checkCollectingCoins();
     this.checkEnemy();
     this.checkThrowObject();
+    this.endbossFight();
+    this.setStopableInterval(()=>{
+      this.collisionWithThrowableObject();
+    }, 100)
   }
 
   enemyDead(enemy){
@@ -67,7 +77,7 @@ class World {
             clearInterval(interval);
         }
     }, 100);
-    enemy.pushInterval(interval);
+    enemy.setStopableInterval();
 }
 
 checkEnemy() {
@@ -83,7 +93,54 @@ checkEnemy() {
         } 
     });
 }
-  
+
+endbossFight() {
+  this.level.enemies.forEach(enemy => {
+      if (enemy instanceof EndBoss && this.character.x >= 1300 || enemy.activate) {
+          if (enemy.energy > 0 && !enemy.isHurt()) {
+              enemy.run(this.character)
+          }
+          this.endFight = true;
+          enemy.activate = true;
+      }
+  });
+}
+
+
+collisionWithThrowableObject() {
+  this.throwableObject.forEach(bottle => {
+      this.level.enemies.forEach(e => {
+          this.bottleHitsEnemy(e, bottle);
+          this.bottleHitsGround(bottle);
+          this.bottleHitsEndboss(e)
+      });
+  });
+}
+
+bottleHitsEnemy(e, bottle) {
+  if (e.isColliding(bottle) && bottle.energy > 0 && bottle.isAboveGround()) {
+      e.hit(100);
+      bottle.hit(100);
+      if (this.audio) {
+          bottle.bottle_splash.play();
+      }
+  };
+}
+
+bottleHitsGround(bottle) {
+  if (!bottle.isAboveGround()) {
+      bottle.speedX = 0;
+      if (this.audio && bottle.energy > 0) {
+        bottle.bottle_splash.play();
+      }
+  }
+}
+
+bottleHitsEndboss(e) {
+  if (e instanceof EndBoss) {
+    this.endBossStatus.setPercentage(e.energy / 4.5, this.endBossStatus.IMAGES_ENDBOSSLIFE);
+  }
+}
 
   checkThrowObject() {
     let checkReloteTime = new Date().getTime();
@@ -136,6 +193,20 @@ checkEnemy() {
     this.level.bottle.splice(this.level.bottle.indexOf(bottle), 1);
   }
 
+  deleteThrowObject() {
+    for (let i = 0; i < this.throwableObject.length; i++) {
+        if (this.throwableObject[i].energy == 0 && !this.throwableObject[i].deleted || !this.throwableObject[i].isAboveGround() && !this.throwableObject[i].deleted) {
+            this.throwableObject[i].deleted = true;
+            setTimeout(() => {
+                if (this.throwableObject[i].deleted) {
+                    this.throwableObject[i].clearIntervals()
+                    this.throwableObject.splice(i, 1)
+                }
+            }, 200);
+        }
+    }
+}
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -147,6 +218,9 @@ checkEnemy() {
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoins);
     this.addToMap(this.statusBarBottle);
+    if(this.endFight){
+      this.addToMap(this.endBossStatus);
+    }
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.clouds);
