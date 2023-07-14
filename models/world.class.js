@@ -71,6 +71,9 @@ class World {
     let interval = setInterval(() => {
         enemy.speed = 0;
         enemy.playAnimation(enemy.IMAGES_DEAD);
+        if (this.audio) {
+          enemy.chicken_sound.play();
+      }
         let checkDate = new Date().getTime();
         if (checkDate > Time) {
             enemy.delete = true;
@@ -96,7 +99,7 @@ checkEnemy() {
 
 endbossFight() {
   this.level.enemies.forEach(enemy => {
-      if (enemy instanceof EndBoss && this.character.x >= 1300 || enemy.activate) {
+      if (enemy instanceof EndBoss && this.character.x >= 3000 || enemy.activate) {
           if (enemy.energy > 0 && !enemy.isHurt()) {
               enemy.run(this.character)
           }
@@ -149,7 +152,7 @@ bottleHitsEndboss(e) {
       this.character.y + 100
     );
     if (this.keyboard.D && this.character.setBottle > 0 && checkReloteTime > this.reload) {
-      this.reload = new Date().getTime() + 100;
+      this.reload = new Date().getTime() + 500;
       this.character.setBottle -= 1;
       this.throwableObject.push(bottle);
       this.statusBarBottle.setBottle -= 1;
@@ -161,6 +164,12 @@ bottleHitsEndboss(e) {
     this.level.coins.forEach((coins) => {
       if (this.character.isColliding(coins)) {
         this.character.setCoins++;
+        if(this.audio){
+          coins.coin_sound.play();
+          setTimeout(()=> {
+            coins.coin_sound.pause();
+        }, 300);
+        }
         this.statusBarCoins.setPercentage(this.character.setCoins);
         this.deleteCollectableCoin(coins);
       }
@@ -171,6 +180,12 @@ bottleHitsEndboss(e) {
     this.level.bottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         this.character.setBottle++;
+        if(this.audio){
+          bottle.bottle_sound.play();
+          setTimeout(()=> {
+            bottle.bottle_sound.pause();
+          }, 600);
+        }
         this.statusBarBottle.setPercentage(this.character.setBottle);
         this.deleteCollectableBottle(bottle);
       }

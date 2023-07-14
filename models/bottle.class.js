@@ -16,6 +16,8 @@ class Bottle extends MovableObjekt{
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
 
+    bottle_sound = new Audio('audio/bottle.mp3');
+    
     constructor(){
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE);

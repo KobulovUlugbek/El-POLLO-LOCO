@@ -51,9 +51,12 @@ images_IsDead = [
     this.loadImages(this.images_IsHurt);
     this.loadImages(this.images_IsDead);
     this.loadImages(this.images_Idle);
-    this.x = 1700;
+    this.x = 3700;
     this.animate();
   }
+
+  boss_sound = new Audio('audio/chicken.mp3');
+
 
 
     run(character) {
@@ -76,6 +79,15 @@ images_IsDead = [
       this.setStopableInterval(() => {
           if (this.energy <= 0) {
               this.playAnimation(this.images_IsDead);
+          
+              if (this.energy <= 0) {
+                this.boss_sound.play();
+
+                setTimeout(()=> {
+                    this.boss_sound.pause();
+                }, 1000);
+            }
+            
           }else if (this.activate && !this.isHurt()) {
               this.playAnimation(this.images_Walking);
           }else if (this.isHurt()) {
