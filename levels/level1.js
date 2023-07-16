@@ -1,6 +1,6 @@
-/* let level1;
+let level1;
 
-function initLevel1(){ */
+function start(){
 
 level1 = new Level(
     [
@@ -82,4 +82,6 @@ level1 = new Level(
     ]
 );
 
-/* } */
+document.getElementById('startscreen').classList.add('d-none');
+
+}

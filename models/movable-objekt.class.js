@@ -11,7 +11,6 @@ class MovableObjekt extends DrawableObject {
   deleted = false;
   world;
 
-
   offset = {
     top: 0,
     bottom: 0,
@@ -19,16 +18,14 @@ class MovableObjekt extends DrawableObject {
     right: 0
   };
 
-
-  
   setStopableInterval(fn, time) {
     let id = setInterval(fn, time);
     this.Intervals.push(id);
-}
+  }
 
-clearIntervals() {
+  clearIntervals() {
     this.Intervals.forEach(clearInterval);
-}
+  }
 
   applyGravity() {
     setInterval(() => {
@@ -64,16 +61,16 @@ clearIntervals() {
   }
 
   hit() {
-    let Time =  new Date().getTime() + 2000
-    if( Time > this.lastHit){
-    this.energy -= 5;
-    if (this.energy < 0) {
+    let Time = new Date().getTime() + 2000;
+    if (Time > this.lastHit) {
+      this.energy -= 5;
+      if (this.energy < 0) {
         this.energy = 0;
-    } else {
+      } else {
         this.lastHit = new Date().getTime();
+      }
     }
-}
-}
+  }
 
   isDead() {
     return this.energy == 0;
@@ -94,30 +91,30 @@ clearIntervals() {
 
   moveRight(speed) {
     if (speed) {
-        this.speed = speed;
+      this.speed = speed;
     }
     this.x += this.speed;
   }
 
   moveLeft(speed) {
-  if (speed) {
+    if (speed) {
       this.speed = speed;
-  }
-  this.x -= this.speed;
+    }
+    this.x -= this.speed;
   }
 
   jump(low) {
     if (low) {
-        this.speedY = 20;
+      this.speedY = 22;
     } else {
-        this.speedY = 25;
+      this.speedY = 25;
     }
-}
+  }
 
   rushAttack() {
     this.speed = 3;
     if (!this.isAboveGround()) {
-      this.jump('low')  
-    }        
-}
+      this.jump("low");
+    }
+  }
 }

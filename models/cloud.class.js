@@ -9,7 +9,6 @@ class Cloud extends MovableObjekt {
 
     this.x = Math.random() * 5000;
     this.animate();
-
   }
 
   animate() {
@@ -18,4 +17,3 @@ class Cloud extends MovableObjekt {
     }, 1000 / 60);
   }
 }
-

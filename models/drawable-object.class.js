@@ -12,22 +12,21 @@ class DrawableObject {
     this.img.src = path;
   }
 
-    /**
+  /**
    *
    * @param {Array} arr - ['img/image1.png', 'img/image2.png', ....]
    */
-    loadImages(arr) {
-      arr.forEach((path) => {
-        let img = new Image();
-        img.src = path;
-        this.imageCache[path] = img;
-      });
-    }
+  loadImages(arr) {
+    arr.forEach((path) => {
+      let img = new Image();
+      img.src = path;
+      this.imageCache[path] = img;
+    });
+  }
 
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
-
 
   drawFrame(ctx) {
     if (
@@ -35,11 +34,12 @@ class DrawableObject {
       this instanceof Chicken ||
       this instanceof EndBoss ||
       this instanceof ThrowableObject
-/*       this instanceof Coin
- */    ) {
+      /*       this instanceof Coin
+       */
+    ) {
       ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "blue";
+      ctx.lineWidth = "0";
+      ctx.strokeStyle = "transparent";
       ctx.rect(this.x, this.y, this.width, this.height);
       ctx.stroke();
     }

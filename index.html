@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,15 +26,125 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
 </head>
-<body onload="init()">
 
-<!--     <h1>El Pollo Loco</h1>
- -->
-    <canvas id="canvas" width="720px" height="480px">
+<body onload="">
+    <h1>El Pollo Loco</h1>
+    <div id="fullscreen">
+        <div id="content">
+            <canvas id="canvas" width="720" height="480"></canvas>
+            <div class="game-images">
+                <div id="startscreen">
+                    <img src="img/9_intro_outro_screens/start/startscreen_2.png" alt="startscreen">
+                    <div id="startbtn">
+                        <button class="btn" onclick="start(); init()">Start</button>
+                    </div>
+                </div>
 
-    </canvas>
+                <div id="gameOver" class="d-none">
+                    <img src="img/9_intro_outro_screens/game_over/game over!.png" alt="game over">
+                    <div id="restartBtn">
+                        <button class="btn" onclick="restart('gameOver')">Restart</button>
+                    </div>
+                </div>
+                <div id="lost" class="d-none">
+                    <img src="img\9_intro_outro_screens\game_over\oh no you lost!.png" alt="lost">
+                    <div id="restartBtn">
+                        <button class="btn" onclick="restart('lost')">Restart</button>
+                    </div>
+                </div>
 
-<!--     <button id="start-button" onclick="initLevel11()">Start</button>
- -->    
+                <div id="settings" class="d-none">
+                    <div class="settingsCard">
+                        <div class="d-flex-center">
+                            <h2>Controls</h2>
+                        </div>
+                        <div class="d-flex-center">
+                            <div class="row">
+                                <img src="img/icon/arrow-left.png" alt="arrowleft">
+                                <img src="img/icon/arrow-right.png" alt="arrowright">
+                            </div>
+                            <p>=</p>
+                            <div class="row">
+                                <span>Move</span>
+                            </div>
+                        </div>
+                        <div class="d-flex-center">
+                            <div class="row">
+                                <span>D</span>
+                            </div>
+                            <p>=</p>
+                            <div class="row">
+                                <span>Throw Bottle</span>
+                            </div>
+                        </div>
+                        <div class="d-flex-center">
+                            <div class="row">
+                                <span>Space</span>
+                            </div>
+                            <p>=</p>
+                            <div class="row">
+                                <span>Jump</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mediaBtn">
+                    <div class="subcontainerHud">
+                        <button class="CtrlBtn" id="btnLeft"><img src="img/icon/arrow-left.png"></button>
+                        <button class="CtrlBtn" id="btnRight"><img src="img/icon/arrow-right.png"></button>
+                    </div>
+                    <div class="subcontainerHud">
+                        <button class="CtrlBtn Jump-btn" id="btnJump"><img src="img/icon/arrow-left.png"></button>
+                        <button class="CtrlBtn" id="btnThrow"><b>TROW</b></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn fullscreen">
+                <img id="settingsBtn" src="img/icon/settings.png" alt="settings" onclick="openSettings()">
+                <img src="img/icon/fullscreen.png" alt="settings" onclick="toggleFullscreen()">
+            </div>
+
+
+        </div>
+        <div class="rotate">
+            <h1>Rotate Your Phone 90 Degrees</h1>
+        </div>
+    </div>
+
+
+    <script>
+        let canvasElement = document.getElementById('canvas');
+        let isFullscreen = false;
+
+        function toggleFullscreen() {
+            if (isFullscreen) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        function enterFullscreen() {
+            if (canvasElement.requestFullscreen) {
+                canvasElement.requestFullscreen();
+            } else if (canvasElement.msRequestFullscreen) {      // für IE11 (entfernen ab dem 15. Juni 2022)
+                canvasElement.msRequestFullscreen();
+            } else if (canvasElement.webkitRequestFullscreen) {  // iOS Safari
+                canvasElement.webkitRequestFullscreen();
+            }
+            isFullscreen = true;
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+            isFullscreen = false;
+        }
+    </script>
 </body>
+
 </html>
