@@ -263,7 +263,7 @@ bottleHitsEndboss(e) {
   let checkReloteTime = new Date().getTime();
   let bottle = new ThrowableObject(
     this.character.x + 60,
-    this.character.y + 100
+    this.character.y + 100, this.character.otherDirection
   );
   if (
     this.keyboard.D &&
