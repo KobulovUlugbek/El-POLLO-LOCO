@@ -7,6 +7,7 @@ class ThrowableObject extends MovableObjekt {
   };
   deleted = false;
   speedX = 5;
+  otherDirection = false;
 
   SPLASH = [
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
@@ -54,10 +55,18 @@ class ThrowableObject extends MovableObjekt {
   }
 
   throw() {
-    this.speedY = 30;
-    this.applyGravity();
-    setInterval(() => {
-      this.x += 10;
-    }, 25);
+    if (this.otherDirection) {
+      this.speedY = 30;
+      this.applyGravity();
+      setInterval(() => {
+        this.x += 10;
+      }, 25);
+    } else {
+      this.applyGravity();
+      this.speedY = 30;
+      setInterval(() => {
+        this.x -= 10;
+      }, 25);
+    }
   }
 }

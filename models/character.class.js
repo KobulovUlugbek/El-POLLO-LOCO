@@ -109,6 +109,8 @@ class Character extends MovableObjekt {
       this.setLastMoveTime();
       if (this.world.audio) {
         this.walking_sound.play();
+      } else {
+        this.walking_sound.pause();
       }
     }
   }
@@ -121,6 +123,8 @@ class Character extends MovableObjekt {
       this.setLastMoveTime();
       if (this.world.audio) {
         this.walking_sound.play();
+      } else {
+        this.walking_sound.pause();
       }
     }
   }
@@ -132,6 +136,8 @@ class Character extends MovableObjekt {
       this.setLastMoveTime();
       if (this.world.audio) {
         this.jump_sound.play();
+      } else {
+        this.jump_sound.pause();
       }
     }
   }
