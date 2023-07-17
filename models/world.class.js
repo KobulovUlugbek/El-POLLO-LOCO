@@ -442,6 +442,7 @@ deleteThrowObject() {
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
@@ -453,7 +454,6 @@ deleteThrowObject() {
     this.ctx.translate(this.camera_x, 0);
 
     if (!this.gameOver) {
-      this.addObjectsToMap(this.level.clouds);
       this.addToMap(this.character);
       this.addObjectsToMap(this.level.coins);
       this.addObjectsToMap(this.level.bottle);

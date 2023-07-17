@@ -1,4 +1,12 @@
+/**
+ * Klasse für die Darstellung des Flaschenstatus in der Statusleiste.
+ * Erbt von der Klasse "DrawableObject".
+ */
 class StatusBarBottle extends DrawableObject {
+  /**
+   * Array der Bildpfade für die verschiedenen Zustände des Flaschenstatus.
+   * @type {string[]}
+   */
   IMAGES = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
@@ -8,8 +16,15 @@ class StatusBarBottle extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png"
   ];
 
+  /**
+   * Anzahl der gesammelten Flaschen.
+   * @type {number}
+   */
   setBottle = 0;
 
+  /**
+   * Konstruktor der StatusBarBottle-Klasse.
+   */
   constructor() {
     super();
     this.loadImages(this.IMAGES);
@@ -20,12 +35,20 @@ class StatusBarBottle extends DrawableObject {
     this.setPercentage(0);
   }
 
+  /**
+   * Setzt den Prozentsatz des Flaschenstatus.
+   * @param {number} setBottle - Die Anzahl der gesammelten Flaschen.
+   */
   setPercentage(setBottle) {
     this.setBottle = setBottle;
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Ermittelt den Index des Bildes basierend auf der Anzahl der gesammelten Flaschen.
+   * @returns {number} - Der Index des Bildes.
+   */
   resolveImageIndex() {
     if (this.setBottle == 8) {
       return 5;

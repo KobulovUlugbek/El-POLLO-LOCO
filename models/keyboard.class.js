@@ -1,15 +1,53 @@
+/**
+ * Klasse zur Steuerung des Spiels über Tastatur- oder Touch-Eingabe.
+ */
 class Keyboard {
+  /**
+   * Status der linken Pfeiltaste.
+   * @type {boolean}
+   */
   LEFT = false;
+
+  /**
+   * Status der rechten Pfeiltaste.
+   * @type {boolean}
+   */
   RIGHT = false;
+
+  /**
+   * Status der oberen Pfeiltaste.
+   * @type {boolean}
+   */
   UP = false;
+
+  /**
+   * Status der unteren Pfeiltaste.
+   * @type {boolean}
+   */
   DOWN = false;
+
+  /**
+   * Status der Leertaste.
+   * @type {boolean}
+   */
   SPACE = false;
+
+  /**
+   * Status der "D"-Taste.
+   * @type {boolean}
+   */
   D = false;
 
+  /**
+   * Erzeugt eine Instanz der Keyboard-Klasse.
+   */
   constructor() {
     this.pressedBtnEvents();
   }
 
+  /**
+   * Ereignisbehandlung für gedrückte Tasten.
+   */
   pressedBtnEvents() {
     setInterval(() => {
       document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
