@@ -35,10 +35,12 @@ document.addEventListener("keyup", (event) => {
   if (event.keyCode == 68) keyboard.D = false;
 });
 
+
 function restart(id) {
   let content = document.getElementById(id);
   content.classList.add("d-none");
   document.getElementById("startscreen").classList.remove("d-none");
+  this.updateSoundIcon(); // Das Sound-Icon auf "On" setzen
 }
 
 function openSettings() {
@@ -54,3 +56,4 @@ function closeSettings() {
   btn.src = "img/icon/settings.png";
   document.getElementById("settings").classList.add("d-none");
 }
+

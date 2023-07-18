@@ -307,35 +307,41 @@ canvas {
   }
 }
 
+#soundIcon{
+  margin-left: 10px;
+}
+
+
+/* 
 .circle-green {
   background-color: rgb(11, 210, 11);
   border-radius: 50%;
   border: solid 2.5px rgb(95, 249, 29);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Fügen Sie einen Schatten hinzu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); 
   margin-left: 5px;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s; /* Fügen Sie eine Übergangseigenschaft hinzu */
+  transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 .circle-red {
   background-color: rgb(254, 7, 7);
   border-radius: 50%;
   border: solid 2.5px rgb(247, 169, 169);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Fügen Sie einen Schatten hinzu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); 
   width: 30px;
   height: 30px;
   margin-left: 5px;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s; /* Fügen Sie eine Übergangseigenschaft hinzu */
+  transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 .circle-green:active,
 .circle-red:active {
-  transform: translateY(2px); /* Ändern Sie die vertikale Position um 2px, um den eingedrückten Effekt zu erzeugen */
-  box-shadow: none; /* Entfernen Sie den Schatten im eingedrückten Zustand */
-}
+  transform: translateY(2px); 
+  box-shadow: none; 
+} */
 
 
 

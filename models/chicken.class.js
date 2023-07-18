@@ -39,7 +39,6 @@ class Chicken extends MovableObjekt {
    * @type {boolean}
    */
   delete = false;
-
   /**
    * Array mit den Bildpfaden für die Laufanimation des Huhns.
    * @type {string[]}

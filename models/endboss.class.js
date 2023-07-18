@@ -121,24 +121,18 @@ class EndBoss extends MovableObjekt {
   }
 
   /**
-   * Audioelement für den Bossklang.
-   * @type {Audio}
-   */
-  boss_sound = new Audio("audio/chicken.mp3");
-
-  /**
    * Führt die Aktion des Endbosses aus, um dem Charakter zu folgen.
    * @param {Character} character - Der Charakter, dem der Endboss folgen soll.
    */
   run(character) {
     if (this.x > character.x - 300 && !this.right) {
-      this.moveLeft(24);
+      this.moveLeft(14);
       this.otherDirection = false;
       if (this.x <= character.x - 100) {
         this.right = true;
       }
     } else if (this.x < character.x + 300 && this.right) {
-      this.moveRight(24);
+      this.moveRight(14);
       this.otherDirection = true;
       if (this.x >= character.x) {
         this.right = false;
@@ -153,14 +147,6 @@ class EndBoss extends MovableObjekt {
     this.setStopableInterval(() => {
       if (this.energy <= 0) {
         this.playAnimation(this.DEAD);
-
-        if (this.energy <= 0) {
-          this.boss_sound.play();
-
-          setTimeout(() => {
-            this.boss_sound.pause();
-          }, 1000);
-        }
       } else if (this.activate && !this.isHurt()) {
         this.playAnimation(this.WALKING);
       } else if (this.isHurt()) {
